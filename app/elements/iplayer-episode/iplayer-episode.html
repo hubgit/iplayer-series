@@ -1,0 +1,52 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<dom-module id="iplayer-episode">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+
+      paper-card {
+        width: 100%;
+      }
+
+      .episode {
+        display: block;
+        text-decoration: none;
+        position: relative;
+      }
+
+      .image {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+    </style>
+
+    <paper-card elevation="1">
+      <div class="card-content">
+        <div class="title">[[episode.position]] &middot; [[episode.title]]</div>
+      </div>
+      <a class="episode" target="iplayer"
+        href="http://www.bbc.co.uk/iplayer/episode/[[episode.pid]]"><img class="image" src="[[computeImageURL(episode.image.pid)]]"></a>
+    </paper-card>
+  </template>
+  <script>
+  (function() {
+    'use strict';
+
+    Polymer({
+      is: 'iplayer-episode',
+
+      properties: {
+        episode: Object
+      },
+
+      computeImageURL: function(pid) {
+        return 'http://ichef.bbci.co.uk/images/ic/320x180/' + pid + '.jpg';
+      },
+    });
+  })();
+  </script>
+</dom-module>

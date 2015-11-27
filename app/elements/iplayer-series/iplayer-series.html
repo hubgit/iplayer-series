@@ -1,0 +1,75 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<dom-module id="iplayer-series">
+  <template>
+    <style>
+      :host {
+        display: block;
+        background: #ddd;
+      }
+
+      iplayer-episode:not(:last-of-type) {
+        margin-bottom: 1rem;
+      }
+
+      .title {
+        font-size: 120%;
+        padding: 1rem;
+      }
+    </style>
+
+    <div class="title">
+      <span>[[itemResponse.programme.title]]</span>
+    </div>
+
+    <template is="dom-repeat" items="[[episodes]]">
+        <iplayer-episode episode="[[item.programme]]"></iplayer-episode>
+    </template>
+
+    <iron-ajax
+      auto
+      url="[[computeItemURL(pid)]]"
+      handle-as="json"
+      last-response="{{itemResponse}}"
+      ></iron-ajax>
+
+    <iron-ajax
+      auto
+      url="[[computeEpisodesURL(pid)]]"
+      handle-as="json"
+      on-response="sortEpisodes"
+      ></iron-ajax>
+  </template>
+  <script>
+  (function() {
+    'use strict';
+
+    Polymer({
+      is: 'iplayer-series',
+
+      properties: {
+        pid: String,
+        episodes: Array
+      },
+
+      computeItemURL: function(pid) {
+        return 'http://www.bbc.co.uk/programmes/' + pid + '.json';
+      },
+
+      computeEpisodesURL: function(pid) {
+        return 'http://www.bbc.co.uk/programmes/' + pid + '/episodes/player.json';
+      },
+
+      sortEpisodes: function(event) {
+        var episodes = event.detail.response.episodes.sort(function(a, b) {
+          return Number(a.programme.position) - Number(b.programme.position);
+        });
+
+        console.log(episodes);
+
+        this.set('episodes', episodes);
+      }
+    });
+  })();
+  </script>
+</dom-module>

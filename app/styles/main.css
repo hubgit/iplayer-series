@@ -1,0 +1,10 @@
+body {
+  background: #ddd;
+  font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: #333;
+}
+
+.column {
+  padding-right: 1rem;
+  width: 320px;
+}
