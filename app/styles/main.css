@@ -8,3 +8,9 @@ body {
   padding-right: 1rem;
   width: 320px;
 }
+
+
+.column-title {
+  font-size: 120%;
+  padding: 1rem;
+}

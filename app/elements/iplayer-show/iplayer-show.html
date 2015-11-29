@@ -6,26 +6,19 @@
     :host {
       display: block;
     }
-
-    .title {
-      font-size: 120%;
-      padding: 1rem;
-    }
     </style>
 
-    <div class="title">[[show.title]]</div>
+    <template is="dom-repeat" items="[[series]]">
+      <iplayer-series pid="[[item.pid]]"></iplayer-series>
+    </template>
 
-    <paper-card elevation="0" x-heading="[[show.title]]" image="[[computeImageURL(show.image.pid)]]">
-      <template is="dom-repeat" items="[[series]]">
-        <iplayer-series pid="[[item.pid]]"></iplayer-series>
-      </template>
-    </paper-card>
-
+    <!--
     <iron-ajax auto
       url="[[computeShowURL(pid)]]"
       handle-as="json"
       on-response="handleShowResponse"
       ></iron-ajax>
+    -->
 
     <iron-ajax auto
       url="[[computeSeriesURL(pid)]]"
@@ -42,17 +35,15 @@
 
       properties: {
         pid: String,
-        show: Object,
-        series: Array,
-        fetch: {
-          type: Boolean,
-          value: false
-        },
+        //show: Object,
+        series: Array
       },
 
+      /*
       computeShowURL: function(pid) {
         return 'http://www.bbc.co.uk/programmes/' + pid + '.json';
       },
+      */
 
       computeSeriesURL: function(pid) {
         return 'http://www.bbc.co.uk/programmes/' + pid + '/series.json';
@@ -62,9 +53,11 @@
         return 'http://ichef.bbci.co.uk/images/ic/320x180/' + pid + '.jpg';
       },
 
+      /*
       handleShowResponse: function(event, request) {
         this.set('show', request.response.programme);
       },
+      */
 
       handleSeriesResponse: function(event, request) {
         this.set('series', request.response.programmes);
