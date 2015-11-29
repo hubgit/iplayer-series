@@ -5,10 +5,9 @@
     <style>
       :host {
         display: block;
-        background: #ddd;
       }
 
-      iplayer-episode:not(:last-of-type) {
+      iplayer-episode {
         margin-bottom: 1rem;
       }
 
@@ -18,9 +17,11 @@
       }
     </style>
 
+    <!--
     <div class="title">
       <span>[[itemResponse.programme.title]]</span>
     </div>
+    -->
 
     <template is="dom-repeat" items="[[episodes]]">
         <iplayer-episode episode="[[item.programme]]"></iplayer-episode>
@@ -64,8 +65,6 @@
         var episodes = event.detail.response.episodes.sort(function(a, b) {
           return Number(a.programme.position) - Number(b.programme.position);
         });
-
-        console.log(episodes);
 
         this.set('episodes', episodes);
       }

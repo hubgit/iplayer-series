@@ -26,7 +26,9 @@
 
     <paper-card elevation="1">
       <div class="card-content">
-        <div class="title">[[episode.position]] &middot; [[episode.title]]</div>
+        <div class="title">
+          <template is="dom-if" if="[[episode.programme.position]]"><span>[[episode.programme.position]].</span></template><span>[[episode.position]] &middot; [[episode.title]]</span>
+        </div>
       </div>
       <a class="episode" target="iplayer"
         href="http://www.bbc.co.uk/iplayer/episode/[[episode.pid]]"><img class="image" src="[[computeImageURL(episode.image.pid)]]"></a>
