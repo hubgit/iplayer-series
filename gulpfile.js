@@ -283,20 +283,9 @@ gulp.task('serve:dist', ['default'], function () {
   });
 });
 
-// Build then deploy to GitHub pages gh-pages branch
-gulp.task('build-deploy-gh-pages', function(cb) {
-  runSequence(
-    'default',
-    'deploy-gh-pages',
-    cb);
-});
-
-// Deploy to GitHub pages gh-pages branch
+// Deploy to GitHub Pm .ages gh-pages branch
 gulp.task('deploy-gh-pages', function() {
-  return gulp.src('dist/**/*')
-    // Check if running task from Travis Cl, if so run using GH_TOKEN
-    // otherwise run using ghPages defaults.
-    .pipe($.ghPages());
+  return gulp.src('dist/**/*').pipe($.ghPages());
 });
 
 // Build production files, the default task
